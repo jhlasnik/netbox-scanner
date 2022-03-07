@@ -12,12 +12,18 @@ except  FileNotFoundError:
 except:
   sys.exit('\nError: An error occured while trying to import the YAML variable file.\n')
 
-print(addresses)
-
-results=multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, privileged=False)
-
+valid_list=[]
 alive=[]
 dead=[]
+for item in addresses:
+        try:
+            answer = resolver.resolve(item, 'A')
+            valid_list.append(str(answer[0]))
+        except:
+            dead.append(item)
+
+results=multiping(valid_list, count=2, interval=0.5, timeout=2, concurrent_tasks=50, privileged=False)
+
 for host in results:
     if host.is_alive:
         try:
