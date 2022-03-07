@@ -20,7 +20,7 @@ for item in addresses:
             answer = resolver.resolve(item, 'A')
             valid_list.append(str(answer[0]))
         except:
-            dead.append(item)
+            dead.append('{item} - DNS Resolution Failed')
 
 results=multiping(valid_list, count=2, interval=0.5, timeout=2, concurrent_tasks=50, privileged=False)
 
