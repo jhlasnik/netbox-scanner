@@ -26,20 +26,21 @@ results=multiping(valid_list, count=2, interval=0.5, timeout=2, concurrent_tasks
 
 for host in results:
     if host.is_alive:
+        
         try:
             qname = reversename.from_address(host.address)
             answer = resolver.resolve(qname, 'PTR')
-            alive.append(str(answer[0]))
+            alive.append(f'{str(answer[0])} - {host.address}')
         except resolver.NXDOMAIN:
-            alive.append(host.address)
+            alive.append('Mising PTR - {host.address}')
         
     else:
         try:
             qname = reversename.from_address(host.address)
             answer = resolver.resolve(qname, 'PTR')
-            dead.append(str(answer[0]))
+            dead.append(f'{str(answer[0])} - {host.address}')
         except resolver.NXDOMAIN:
-            dead.append(host.address)
+            dead.append('Mising PTR - {host.address}')
 
 for host in alive:
     print(f'Alive: {host}')
