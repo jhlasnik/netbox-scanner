@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pythondns = "*"
+icmplib = "==3.0.3"
+pyyaml = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
